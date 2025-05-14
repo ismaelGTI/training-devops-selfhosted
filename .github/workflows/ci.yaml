@@ -12,7 +12,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        path: . #Evitar crear un subdirectorio adicional
+        path: repo #Evitar crear un subdirectorio adicional
 
     # Paso 2: Iniciar sesión en Docker Hub
     - name: Log in to Docker Hub
@@ -23,14 +23,14 @@ jobs:
 
     # Paso 3: Construir y subir la imagen de Angular
     - name: Build and push Angular image
-      working-directory: ./training-angular
+      working-directory: ./repo/training-angular
       run: |
         docker build -t ismaelmrn/training-angular:0.0.1 .
         docker push ismaelmrn/training-angular:0.0.1
 
     # Paso 4: Construir y subir la imagen de Spring Boot
     - name: Build and push Spring Boot image
-      working-directory: ./training-spring-boot
+      working-directory: ./repo/training-spring-boot
       run: |
         mvn clean package
         docker build -t ismaelmrn/training-spring-boot:0.0.1 .
