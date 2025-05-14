@@ -21,6 +21,20 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+    
+    - name: Debug directory structure
+      run: |
+        echo "Contenido de _work:"
+        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work
+        echo "Contenido de _work/training-devops-selfhosted:"
+        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted
+        echo "Contenido de _work/training-devops-selfhosted/training-devops-selfhosted:"
+        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted
+        echo "Contenido de _work/training-devops-selfhosted/training-devops-selfhosted/repo:"
+        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted/repo
+        echo "Contenido de _work/training-devops-selfhosted/training-devops-selfhosted/repo/training-angular:"
+        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted/repo/training-angular || echo "training-angular no existe"
+
     # Paso 3: Construir y subir la imagen de Angular
     - name: Build and push Angular image
       working-directory: /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted/repo/training-angular
