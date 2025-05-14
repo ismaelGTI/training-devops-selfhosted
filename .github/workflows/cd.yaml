@@ -18,12 +18,12 @@ jobs:
 
     - name: Debug directory structure
       run: |
-        echo "Contenido de _work/training-devops-selfhosted:"
-        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted
-        echo "Contenido de _work/training-devops-selfhosted/training-devops-selfhosted:"
-        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted
-        echo "Contenido de _work/training-devops-selfhosted/training-devops-selfhosted/k8s:"
-        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted/k8s || echo "k8s no existe"
+        echo "Contenido de mywork:"
+        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork
+        echo "Contenido de mywork/training-devops-selfhosted:"
+        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork/training-devops-selfhosted
+        echo "Contenido de mywork/training-devops-selfhosted/k8s:"
+        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork/training-devops-selfhosted/k8s || echo "k8s no existe"
 
     - name: Verify cluster connection
       run: |
@@ -32,11 +32,11 @@ jobs:
 
     - name: Deploy Angular
       run: |
-        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted/k8s/angular-deployment.yaml
+        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork/training-devops-selfhosted/k8s/angular-deployment.yaml
 
     - name: Deploy Spring Boot
       run: |
-        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted/k8s/springboot-deployment.yaml
+        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork/training-devops-selfhosted/k8s/springboot-deployment.yaml
 
     - name: Wait for pods to be ready
       run: |
@@ -47,4 +47,4 @@ jobs:
       run: |
         kubectl get services
         curl --fail --silent http://localhost:30080 || echo "Angular service not accessible"
-        curl --fail --silent http://localhost:30081/hello || echo "Spring Boot serv
+        curl --fail --silent http://localhost:30081/hello || echo "Spring Boot service not accessible"
