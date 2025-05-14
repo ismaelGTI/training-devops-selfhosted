@@ -15,12 +15,11 @@ jobs:
     - name: Debug directory structure
       run: |
         echo "Contenido de _work:"
-        ls -l /mnt/c/Users/joseimaringhalem/actions-runner/_work  # Ajusta si no moviste el runner
+        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work
         echo "Contenido de _work/training-devops-selfhosted:"
-        ls -l /mnt/c/Users/joseimaringhalem/actions-runner/_work/training-devops-selfhosted
+        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted
         echo "Contenido de _work/training-devops-selfhosted/training-angular:"
-        ls -l /mnt/c/Users/joseimaringhalem/actions-runner/_work/training-devops-selfhosted/training-angular || echo "training-angular no existe"
-
+        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-angular || echo "training-angular no existe"
     # Paso 2: Iniciar sesión en Docker Hub
     - name: Log in to Docker Hub
       uses: docker/login-action@v3

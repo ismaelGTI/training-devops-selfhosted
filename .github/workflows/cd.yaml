@@ -24,7 +24,7 @@ jobs:
         ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted
         echo "Contenido de _work/training-devops-selfhosted/k8s:"
         ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/k8s || echo "k8s no existe"
-
+        
     # Paso 2: Verificar conexión con el clúster
     - name: Verify cluster connection
       run: |
