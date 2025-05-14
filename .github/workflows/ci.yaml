@@ -23,14 +23,14 @@ jobs:
 
     # Paso 3: Construir y subir la imagen de Angular
     - name: Build and push Angular image
-      working-directory: ./repo/training-angular
+      working-directory: /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted/repo/training-angular
       run: |
         docker build -t ismaelmrn/training-angular:0.0.1 .
         docker push ismaelmrn/training-angular:0.0.1
 
     # Paso 4: Construir y subir la imagen de Spring Boot
     - name: Build and push Spring Boot image
-      working-directory: ./repo/training-spring-boot
+      working-directory: /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted/repo/training-spring-boot
       run: |
         mvn clean package
         docker build -t ismaelmrn/training-spring-boot:0.0.1 .

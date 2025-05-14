@@ -28,12 +28,12 @@ jobs:
     # Paso 3: Desplegar Angular
     - name: Deploy Angular
       run: |
-        kubectl apply -f repo/k8s/angular-deployment.yaml
+        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted/repo/k8s/angular-deployment.yaml
 
     # Paso 4: Desplegar Spring Boot
     - name: Deploy Spring Boot
       run: |
-        kubectl apply -f repo/k8s/springboot-deployment.yaml
+        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted/repo/k8s/springboot-deployment.yaml
 
     # Paso 5: Esperar a que los pods estén listos
     - name: Wait for pods to be ready
