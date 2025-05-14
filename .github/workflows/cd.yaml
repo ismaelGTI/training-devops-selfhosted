@@ -17,7 +17,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        path: repo # Evitar crear un subdirectorio adicional
+        path: /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/repo # Evitar crear un subdirectorio adicional
+
+    - name: Debug directory structure
+      run: |
+        echo "Contenido de _work/repo:"
+        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/repo
+        echo "Contenido de _work/repo/k8s:"
+        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/repo/k8s || echo "k8s no existe"
 
     # Paso 2: Verificar conexión con el clúster
     - name: Verify cluster connection
@@ -28,12 +35,12 @@ jobs:
     # Paso 3: Desplegar Angular
     - name: Deploy Angular
       run: |
-        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted/repo/k8s/angular-deployment.yaml
+        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/repo/k8s/angular-deployment.yaml
 
     # Paso 4: Desplegar Spring Boot
     - name: Deploy Spring Boot
       run: |
-        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted/repo/k8s/springboot-deployment.yaml
+        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/repo/k8s/springboot-deployment.yaml
 
     # Paso 5: Esperar a que los pods estén listos
     - name: Wait for pods to be ready
