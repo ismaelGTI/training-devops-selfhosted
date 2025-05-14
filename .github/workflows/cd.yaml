@@ -13,43 +13,38 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
-    # Paso 1: Clonar el repositorio
     - name: Checkout code
       uses: actions/checkout@v4
-     
 
     - name: Debug directory structure
       run: |
         echo "Contenido de _work/training-devops-selfhosted:"
         ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted
-        echo "Contenido de _work/training-devops-selfhosted/k8s:"
-        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/k8s || echo "k8s no existe"
-        
-    # Paso 2: Verificar conexión con el clúster
+        echo "Contenido de _work/training-devops-selfhosted/training-devops-selfhosted:"
+        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted
+        echo "Contenido de _work/training-devops-selfhosted/training-devops-selfhosted/k8s:"
+        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted/k8s || echo "k8s no existe"
+
     - name: Verify cluster connection
       run: |
         kubectl config current-context
         kubectl get nodes
 
-    # Paso 3: Desplegar Angular
     - name: Deploy Angular
       run: |
-        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/k8s/angular-deployment.yaml
+        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted/k8s/angular-deployment.yaml
 
-    # Paso 4: Desplegar Spring Boot
     - name: Deploy Spring Boot
       run: |
-        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/k8s/springboot-deployment.yaml
+        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/_work/training-devops-selfhosted/training-devops-selfhosted/k8s/springboot-deployment.yaml
 
-    # Paso 5: Esperar a que los pods estén listos
     - name: Wait for pods to be ready
       run: |
         kubectl wait --for=condition=ready pod -l app=angular --timeout=120s
         kubectl wait --for=condition=ready pod -l app=springboot --timeout=120s
 
-    # Paso 6: Verificar los servicios
     - name: Verify services
       run: |
         kubectl get services
         curl --fail --silent http://localhost:30080 || echo "Angular service not accessible"
-        curl --fail --silent http://localhost:30081/hello || echo "Spring Boot service not accessible"
+        curl --fail --silent http://localhost:30081/hello || echo "Spring Boot serv
