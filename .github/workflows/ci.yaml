@@ -11,6 +11,8 @@ jobs:
     # Paso 1: Clonar el repositorio
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        path: . #Evitar crear un subdirectorio adicional
 
     # Paso 2: Iniciar sesión en Docker Hub
     - name: Log in to Docker Hub
