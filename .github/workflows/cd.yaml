@@ -16,6 +16,8 @@ jobs:
     # Paso 1: Clonar el repositorio
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        path: repo # Evitar crear un subdirectorio adicional
 
     # Paso 2: Verificar conexión con el clúster
     - name: Verify cluster connection
@@ -26,12 +28,12 @@ jobs:
     # Paso 3: Desplegar Angular
     - name: Deploy Angular
       run: |
-        kubectl apply -f k8s/angular-deployment.yaml
+        kubectl apply -f repo/k8s/angular-deployment.yaml
 
     # Paso 4: Desplegar Spring Boot
     - name: Deploy Spring Boot
       run: |
-        kubectl apply -f k8s/springboot-deployment.yaml
+        kubectl apply -f repo/k8s/springboot-deployment.yaml
 
     # Paso 5: Esperar a que los pods estén listos
     - name: Wait for pods to be ready
