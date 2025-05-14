@@ -1,0 +1,47 @@
+name: CD - Deploy to Rancher Desktop
+
+on:
+  workflow_run:
+    workflows: ["CI - Build and Push Images"]
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+    # Paso 1: Clonar el repositorio
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Paso 2: Verificar conexión con el clúster
+    - name: Verify cluster connection
+      run: |
+        kubectl config current-context
+        kubectl get nodes
+
+    # Paso 3: Desplegar Angular
+    - name: Deploy Angular
+      run: |
+        kubectl apply -f k8s/angular-deployment.yaml
+
+    # Paso 4: Desplegar Spring Boot
+    - name: Deploy Spring Boot
+      run: |
+        kubectl apply -f k8s/springboot-deployment.yaml
+
+    # Paso 5: Esperar a que los pods estén listos
+    - name: Wait for pods to be ready
+      run: |
+        kubectl wait --for=condition=ready pod -l app=angular --timeout=120s
+        kubectl wait --for=condition=ready pod -l app=springboot --timeout=120s
+
+    # Paso 6: Verificar los servicios
+    - name: Verify services
+      run: |
+        kubectl get services
+        curl --fail --silent http://localhost:30080 || echo "Angular service not accessible"
+        curl --fail --silent http://localhost:30081/hello || echo "Spring Boot service not accessible"
