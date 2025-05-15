@@ -18,7 +18,7 @@ Te explico cómo está organizado todo para que no te pierdas:
 
 - **`README.md`**: ¡El archivo que estás leyendo ahora mismo!  Lo he escrito para que tengas todo claro y puedas seguir los pasos sin liarte.
 
-### ¿Qué necesitas para empezar? 🛠️
+### ¿Qué necesitas para empezar? 🛠
 Antes de ponerte manos a la obra, asegúrate de tener estas cosas listas en tu máquina:
 
 - **Git**: Para clonar el repo y trabajar con el código.
@@ -88,4 +88,4 @@ Cuando el pipeline termine (puedes ver los logs en la pestaña "Actions" de GitH
 
 ---
 
-Si tienes dudas o quieres charlar sobre DevOps, ya sabes dónde encontrarme. ¡A darle caña! 💪
+Si tienes dudas o quieres charlar sobre DevOps, ya sabes dónde encontrarme. ¡A darle caña! 
