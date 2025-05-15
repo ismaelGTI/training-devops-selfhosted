@@ -49,7 +49,7 @@ Te lo pongo fácil, sigue estos pasos y en un rato tendrás todo funcionando:
    Como estamos usando Rancher Desktop, necesitamos un archivo de configuración para que Kubernetes sepa dónde desplegar. Haz esto desde WSL2:
    ```bash
    mkdir -p ~/.kube
-   cp /mnt/c/Users/jose.i.marin.ghalem/.kube/config ~/.kube/config
+   cp /mnt/c/Users/TuUsuario/.kube/config ~/.kube/config
    ```
    Luego, comprueba que todo esté bien:
    ```bash
