@@ -34,7 +34,7 @@ Te lo pongo fácil, sigue estos pasos y en un rato tendrás todo funcionando:
 1. **Clona el repositorio**:
    Abre tu terminal (en WSL2 o donde quieras) y clona el repo:
    ```bash
-   git clone https://github.com/SirNeo/training-devops-selfhosted.git
+   git clone https://github.com/ismaelGTI/training-devops-selfhosted.git
    cd training-devops-selfhosted
    ```
 
