@@ -1,7 +1,7 @@
 name: CI - Build and Push Images 
 #
 # Este flujo de trabajo se encarga de construir y subir imágenes de Docker para Angular y Spring Boot,
-# así como configurar Rancher-desktop.
+# así como configurar Rancher-desktop
 
 on:
   push:
