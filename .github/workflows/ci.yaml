@@ -60,3 +60,13 @@ jobs:
         mvn clean package
         docker build -t ismaelmrn/training-spring-boot:0.0.1 .
         docker push ismaelmrn/training-spring-boot:0.0.1
+
+    # Paso 6: Configurar kubectl& rancher-desktop
+    - name: Configure kubeconfig
+      run: |
+        mkdir -p ~/.kube
+        cp /mnt/c/Users/jose.i.marin.ghalem/.kube/config ~/.kube/config
+        kubectl config use-context rancher-desktop
+        kubectl config current-context
+        kubectl cluster-info
+    
