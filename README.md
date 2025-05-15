@@ -1,6 +1,6 @@
 ## ¡Hola, bienvenido a mi proyecto Training-DevOps-SelfHosted! 
 
-Hey, ¿qué tal? Soy Ismael, y este es mi repositorio `training-devops-selfhosted`, consiste en una automatización del taller https://github.com/SirNeo/training-devops. Lo monté para que tú y yo podamos aprender y practicar DevOps de una forma súper práctica y sin complicarnos la vida. Aquí te cuento cómo funciona todo, qué vas a encontrar y cómo puedes ponerlo a rodar en tu máquina. 
+Hey, ¿qué tal? Soy Ismael, y este es mi repositorio `training-devops-selfhosted`, consiste en una automatización del taller https://github.com/SirNeo/training-devops. Aquí te cuento cómo funciona todo, qué vas a encontrar y cómo puedes ponerlo a rodar en tu máquina. 
 
 ### ¿De qué va este proyecto? 
 Mira, este repositorio es como una caja de herramientas para automatizar el ciclo de vida de dos aplicaciones: un frontend en **Angular** y un backend en **Spring Boot**. Lo que hacemos aquí es construirlas, empaquetarlas en imágenes Docker, subirlas a Docker Hub y luego desplegarlas en un clúster de Kubernetes que corre en **Rancher Desktop**. Todo esto lo automatizamos con un pipeline en **GitHub Actions**, y lo ejecutamos en un runner autohospedado que tengo configurado en mi máquina con WSL2.
