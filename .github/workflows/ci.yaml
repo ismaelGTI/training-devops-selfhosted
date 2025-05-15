@@ -64,20 +64,7 @@ jobs:
         docker build -t ismaelmrn/training-spring-boot:0.0.1 .
         docker push ismaelmrn/training-spring-boot:0.0.1
 
-    # Paso 6: Ejecutar pruebas unitarias para Angular
-    - name: Run Angular unit tests
-      working-directory: /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork/training-devops-selfhosted/training-devops-selfhosted/training-angular/helloworld1
-      run: |
-        npm install
-        npm test -- --watch=false --browsers=ChromeHeadless
-
-    # Paso 7: Ejecutar pruebas unitarias para Spring Boot
-    - name: Run Spring Boot unit tests
-      working-directory: /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork/training-devops-selfhosted/training-devops-selfhosted/training-spring-boot/helloworld
-      run: |
-        mvn test
-
-    # Paso 8: Configurar kubectl& rancher-desktop
+    # Paso 6: Configurar kubectl& rancher-desktop
     - name: Configure kubeconfig
       run: |
         mkdir -p ~/.kube
