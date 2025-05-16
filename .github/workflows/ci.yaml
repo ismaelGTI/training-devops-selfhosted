@@ -17,16 +17,7 @@ jobs:
     # Paso 1: Clonar el repositorio
     - name: Checkout code
       uses: actions/checkout@v4
-      with:
-        path: temp-repo
-
-    # Paso 2: Ajustar la estructura del directorio
-    - name: Adjust directory structure
-      run: |
-        mv ${{ github.workspace }}/temp-repo/training-devops-selfhosted/* ${{ github.workspace }}/
-        rmdir ${{ github.workspace }}/temp-repo/training-devops-selfhosted
-        rmdir ${{ github.workspace }}/temp-repo
-
+      
     # Paso Intermedio: Configurar JDK 17
     - name: Set up JDK 17
       uses: actions/setup-java@v4
@@ -34,44 +25,47 @@ jobs:
         java-version: '17'
         distribution: 'adopt'
 
-    # Paso 3: Inspeccionar la estructura del directorio
+    # Paso 2: Inspeccionar la estructura del directorio
     - name: Debug directory structure
-      working-directory: ${{ github.workspace }}
+      working-directory: ${{ github.workspace }}/training-devops-selfhosted
       run: |
         echo "Contenido de mywork:"
-        ls -l .
+        ls -l ..
       
-        echo "Contenido de mywork/training-angular/helloworld1:"
+        echo "Contenido de mywork/training-devops-selfhosted:"
+        ls -l .
+
+        echo "Contenido de mywork/training-devops-selfhosted/training-angular/helloworld1:"
         ls -l ./training-angular/helloworld1 || echo "helloworld no existe"
         
-        echo "Contenido de mywork/training-spring-boot/helloworld:"
+        echo "Contenido de mywork/training-devops-selfhosted/training-spring-boot/helloworld:"
         ls -l ./training-spring-boot/helloworld || echo "helloworld1 no existe"
 
-    # Paso 4: Iniciar sesión en Docker Hub
+    # Paso 3: Iniciar sesión en Docker Hub
     - name: Log in to Docker Hub
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    # Paso 5: Construir y subir la imagen de Angular
+    # Paso 4: Construir y subir la imagen de Angular
     - name: Build and push Angular image
-      working-directory: ${{ github.workspace }}/training-angular/helloworld1
+      working-directory: ${{ github.workspace }}/training-devops-selfhosted/training-angular/helloworld1
       run: |
         docker build -t ismaelmrn/training-angular:0.0.1 .
         docker push ismaelmrn/training-angular:0.0.1
 
-    # Paso 6: Construir y subir la imagen de Spring Boot
+    # Paso 5: Construir y subir la imagen de Spring Boot
     - name: Build and push Spring Boot image
-      working-directory: ${{ github.workspace }}/training-spring-boot/helloworld
+      working-directory: ${{ github.workspace }}/training-devops-selfhosted/training-spring-boot/helloworld
       run: |
         mvn clean package
         docker build -t ismaelmrn/training-spring-boot:0.0.1 .
         docker push ismaelmrn/training-spring-boot:0.0.1
 
-    # Paso 7: Configurar kubectl & rancher-desktop
+    # Paso 6: Configurar kubectl & rancher-desktop
     - name: Configure kubeconfig
-      working-directory: ${{ github.workspace }}
+      working-directory: ${{ github.workspace }}/training-devops-selfhosted
       run: |
         mkdir -p ~/.kube
         cp ~/../../.kube/config ~/.kube/config
