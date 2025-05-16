@@ -1,4 +1,4 @@
-name: CI - Build and Push Images 
+name: CI - Build and Push Images
 #
 # Este flujo de trabajo se encarga de construir y subir imágenes de Docker para Angular y Spring Boot,
 # así como configurar Rancher-desktop.
@@ -29,18 +29,19 @@ jobs:
 
     # Paso 2: Inspeccionar la estructura del directorio
     - name: Debug directory structure
+      working-directory: ${{ github.workspace }}/training-devops-selfhosted
       run: |
         echo "Contenido de mywork:"
-        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork
+        ls -l ../..
       
         echo "Contenido de mywork/training-devops-selfhosted/training-devops-selfhosted:"
-        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork/training-devops-selfhosted/training-devops-selfhosted
+        ls -l .
 
         echo "Contenido de mywork/training-devops-selfhosted/training-devops-selfhosted/training-angular/helloworld1:"
-        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork/training-devops-selfhosted/training-devops-selfhosted/training-angular/helloworld1 || echo "helloworld no existe"
+        ls -l ./トレーニング-angular/helloworld1 || echo "helloworld no existe"
         
         echo "Contenido de mywork/training-devops-selfhosted/training-devops-selfhosted/training-spring-boot/helloworld:"
-        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork/training-devops-selfhosted/training-devops-selfhosted/training-spring-boot/helloworld || echo "helloworld1 no existe"
+        ls -l ./training-spring-boot/helloworld || echo "helloworld1 no existe"
 
     # Paso 3: Iniciar sesión en Docker Hub
     - name: Log in to Docker Hub
@@ -51,25 +52,25 @@ jobs:
 
     # Paso 4: Construir y subir la imagen de Angular
     - name: Build and push Angular image
-      working-directory: /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork/training-devops-selfhosted/training-devops-selfhosted/training-angular/helloworld1
+      working-directory: ${{ github.workspace }}/training-devops-selfhosted/training-angular/helloworld1
       run: |
         docker build -t ismaelmrn/training-angular:0.0.1 .
         docker push ismaelmrn/training-angular:0.0.1
 
     # Paso 5: Construir y subir la imagen de Spring Boot
     - name: Build and push Spring Boot image
-      working-directory: /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork/training-devops-selfhosted/training-devops-selfhosted/training-spring-boot/helloworld
+      working-directory: ${{ github.workspace }}/training-devops-selfhosted/training-spring-boot/helloworld
       run: |
         mvn clean package
         docker build -t ismaelmrn/training-spring-boot:0.0.1 .
         docker push ismaelmrn/training-spring-boot:0.0.1
 
-    # Paso 6: Configurar kubectl& rancher-desktop
+    # Paso 6: Configurar kubectl & rancher-desktop
     - name: Configure kubeconfig
+      working-directory: ${{ github.workspace }}/training-devops-selfhosted
       run: |
         mkdir -p ~/.kube
-        cp /mnt/c/Users/jose.i.marin.ghalem/.kube/config ~/.kube/config
+        cp ~/../../.kube/config ~/.kube/config
         kubectl config use-context rancher-desktop
         kubectl config current-context
         kubectl cluster-info
-    
