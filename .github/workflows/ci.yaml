@@ -18,7 +18,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        path: .
+        path: training-devops-selfhosted
 
     # Paso Intermedio: Configurar JDK 17
     - name: Set up JDK 17
@@ -32,15 +32,15 @@ jobs:
       working-directory: ${{ github.workspace }}/training-devops-selfhosted
       run: |
         echo "Contenido de mywork:"
-        ls -l ../..
+        ls -l ..
       
-        echo "Contenido de mywork/training-devops-selfhosted/training-devops-selfhosted:"
+        echo "Contenido de mywork/training-devops-selfhosted:"
         ls -l .
 
-        echo "Contenido de mywork/training-devops-selfhosted/training-devops-selfhosted/training-angular/helloworld1:"
+        echo "Contenido de mywork/training-devops-selfhosted/training-angular/helloworld1:"
         ls -l ./training-angular/helloworld1 || echo "helloworld no existe"
         
-        echo "Contenido de mywork/training-devops-selfhosted/training-devops-selfhosted/training-spring-boot/helloworld:"
+        echo "Contenido de mywork/training-devops-selfhosted/training-spring-boot/helloworld:"
         ls -l ./training-spring-boot/helloworld || echo "helloworld1 no existe"
 
     # Paso 3: Iniciar sesión en Docker Hub
