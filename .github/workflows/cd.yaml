@@ -18,21 +18,7 @@ jobs:
     # Paso 1: Clonar el repositorio
     - name: Checkout code
       uses: actions/checkout@v4
-      with:
-        path: .
-
-    # Paso 2: Inspeccionar la estructura del directorio
-    - name: Debug directory structure
-      run: |
-        echo "Contenido de mywork:"
-        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork
-
-        echo "Contenido de mywork/training-devops-selfhosted/training-devops-selfhosted:"
-        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork/training-devops-selfhosted/training-devops-selfhosted
-
-        echo "Contenido de mywork/training-devops-selfhosted/training-devops-selfhosted/k8s:"
-        ls -l /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork/training-devops-selfhosted/training-devops-selfhosted/k8s || echo "k8s no existe"
-
+      
     # Paso 3: Verficiación rancher-desktop  
     - name: Verify cluster connection
       run: |
@@ -42,12 +28,12 @@ jobs:
     # Paso 4: Desplegar Angular 
     - name: Deploy Angular
       run: |
-        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork/training-devops-selfhosted/training-devops-selfhosted/k8s/angular-deployment.yaml
+        kubectl apply -f ${{ github.workspace }}/k8s/angular-deployment.yaml
 
     # Paso 5: Desplegar Spring Boot
     - name: Deploy Spring Boot
       run: |
-        kubectl apply -f /mnt/c/Users/jose.i.marin.ghalem/actions-runner/mywork/training-devops-selfhosted/training-devops-selfhosted/k8s/springboot-deployment.yaml
+        kubectl apply -f ${{ github.workspace }}/k8s/springboot-deployment.yaml
       
     # Paso 6: Tiempo de espera para el despliegue
     - name: Wait for pods to be ready
