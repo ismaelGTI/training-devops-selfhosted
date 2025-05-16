@@ -18,7 +18,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        path: training-devops-selfhosted
+        # No especificamos path para evitar redundancia, se clona a ${{ github.workspace }}
 
     # Paso Intermedio: Configurar JDK 17
     - name: Set up JDK 17
