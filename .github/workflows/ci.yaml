@@ -17,9 +17,7 @@ jobs:
     # Paso 1: Clonar el repositorio
     - name: Checkout code
       uses: actions/checkout@v4
-      with:
-        # No especificamos path para evitar redundancia, se clona a ${{ github.workspace }}
-
+      
     # Paso Intermedio: Configurar JDK 17
     - name: Set up JDK 17
       uses: actions/setup-java@v4
