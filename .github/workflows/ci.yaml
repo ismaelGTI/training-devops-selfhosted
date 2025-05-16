@@ -56,7 +56,7 @@ jobs:
 
     # Paso 6: Configurar kubectl & rancher-desktop
     - name: Configure kubeconfig
-      working-directory: ${{ github.workspace }}/training-devops-selfhosted
+      working-directory: ${{ github.workspace }}
       run: |
         mkdir -p ~/.kube
         cp ~/../../.kube/config ~/.kube/config
