@@ -1,6 +1,6 @@
 name: CD - Deploy to Rancher Desktop
 #
-# Este flujo de trabajo se activa después de que el flujo de trabajo de CI se completa con éxito.
+# Este flujo de trabajo se activa después de que el flujo de trabajo de CI se completa con éxito
 
 on:
   workflow_run:
