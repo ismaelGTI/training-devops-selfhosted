@@ -15,10 +15,7 @@ jobs:
 
 
     steps:
-
-    - name: pwd
-      run: pwd 
-      
+ 
     # Paso 1: Clonar el repositorio
     - name: Checkout code
       uses: actions/checkout@v4
